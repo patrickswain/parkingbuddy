@@ -27,5 +27,4 @@ app.get('/scrape/content', function(req, res){
       res.send('Check your console!')
   })
 })
-app.listen('8081')
-
+app.listen('8081');
