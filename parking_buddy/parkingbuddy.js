@@ -3,52 +3,39 @@
 // Modules ////////////
 var express = require('express');
 var app = express();
-var MongoClient = require('mongodb').MongoClient;
+var fs = require('fs');
 
 // Files /////////
-var webscraper = require('./webscraper.js');
 var dbfile = require('./accessdatabase.js');
+var scraper = require('./scrape.js');
 
 // MongoDB document names
-var SU_DocName = "StudentUnion";
-var CB1_DocName = "5d1688b0fb6fc00e79b23ed0";
-var CB2_DocName = "5d168a86fb6fc00e79b23fb3";
-var MSB_DocName = "5d168b05fb6fc00e79b23fd0";
-var ENG_DocName = "5d176e6efb6fc00e79b260ea";
-var PSY_DocName = "5d17724bfb6fc00e79b2616a";
+var SU_DocName = "SU";
+var CB1_DocName = "CB1";
+var CB2_DocName = "CB2";
+var MSB_DocName = "MSB";
+var ENG_DocName = "ENG";
+var PSY_DocName = "PSY";
 
-console.log(webscraper.testModule());
+console.log(scraper.testModule());
+console.log(dbfile.testModule());
 
-//const databaseURL = "mongodb://<dbuser>:<dbpassword>@ds245387.mlab.com:45387/heroku_lcj9p1fs";
-const databaseURL = "mongodb://Database_User:StrongPassword1@ds245387.mlab.com:45387/heroku_lcj9p1fs";
+async function (identifier) {
 
-// Connect to the db
-MongoClient.connect(databaseURL, function (err, db) {
+  // Scrape site and load json file
+  scraper.scrapeSite();
+  let rawdata = fs.readFileSync('content.json');
+  let data = JSON.parse(rawdata);
+  console.log(data.GarageA);
 
-     if(err) throw err;
+  dbfile.accessFromDatabase(identifier);
 
-		 console.log("Connected to Database?");
+}
 
-		 var database = db.db("heroku_lcj9p1fs");
-		 var collection = database.collection("Distances");
 
-		 // Poll collection "Distances" for document containing correct building
-		 //var cursor = collection.findOne({_id: "5d16837efb6fc00e79b23c4e"});
-
-		 async function getDocument() {
-			 var cursor = await collection.findOne({name: 'StudentUnion'});
-			 //while (cursor == null){}
-
-			 console.log(cursor.Garages[0]);
-			 return cursor;
-		 }
-
-		 getDocument();
-
-		 if (err) throw err;
-
-		 //console.log(cursor.Garages[0]);
-});
+// Routes //////////
+//app.get('/StudentUnion', determineGarage("SU"));
+//app.get('/ClassroomBuilding1', determineGarage("CB1"));
 
 app.get('/', function (req, res) {
   res.send('Hello World!');

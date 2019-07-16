@@ -1,11 +1,20 @@
+exports.testModule = function () {
+	return "Connected to scrape.js";
+};
+
 var express = require('express');
 var fs      = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
 var app     = express();
 
-app.get('/scrape/content', function(req, res){
-  
+// exports.testModule = function () {
+// 	return "Connected to scrape.js";
+// };
+
+//app.get('/scrape/content', function(req, res){
+exports.scrapeSite = function () {
+
   url = 'http://secure.parking.ucf.edu/GarageCount/';
   var arr = [];
 
@@ -26,5 +35,7 @@ app.get('/scrape/content', function(req, res){
       })
       res.send('Check your console!')
   })
-})
-app.listen('8081');
+}
+//})
+
+//app.listen('8081');
