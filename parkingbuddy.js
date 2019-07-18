@@ -3,7 +3,7 @@
 // Modules ////////////
 var express = require('express');
 var app = express();
-const router = app.Router();
+const router = express.Router();
 var fs = require('fs');
 
 // Files /////////
