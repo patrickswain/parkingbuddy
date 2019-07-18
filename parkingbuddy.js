@@ -30,9 +30,11 @@ app.get('/siteData', function (req, res) {
   res.json('Site data reached!');
 });
 
-//app.listen(3000, function () {
-  //console.log('Example app listening on port 3000!');
-//});
+// Connecting to local port or heroku port
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Our app is running on port ${ PORT }`);
+});
 
 //app.get('/StudentUnion', determineGarage("SU"));
 //app.get('/ClassroomBuilding1', determineGarage("CB1"));
