@@ -40,9 +40,9 @@ exports.scrapeSite = function () {
 			}
 			jsonString += "\n}"; // Additional formatting
 
-			console.log("JSON STRING IS :\n" + jsonString);
+			//console.log("JSON STRING IS :\n" + jsonString);
 
 			fs.writeFile('content.json', jsonString, function(err) {});
-      
+
   });
 }
