@@ -13,11 +13,7 @@ var scraper = require('./scrape.js');
 // Routes ////////
 app.use('/testing', router); // For testing
 router.route('/').get(function(req,res){
-  if (err) {
-    console.log(err);
-  } else {
-    res.json({status: 'Success'});
-  }
+    res.json({status: "Success"});
 });
 
 
