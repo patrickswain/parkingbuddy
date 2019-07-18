@@ -3,6 +3,7 @@
 // Modules ////////////
 var express = require('express');
 var app = express();
+const router = app.Router();
 var fs = require('fs');
 
 // Files /////////
@@ -10,13 +11,24 @@ var dbfile = require('./accessdatabase.js');
 var scraper = require('./scrape.js');
 
 // Routes ////////
+app.use('/testing', router); // For testing
+router.route('/').get(function(req,res){
+  if (err) {
+    console.log(err);
+  } else {
+    res.json({status: 'Success'});
+  }
+});
+
+
+
 app.get('/', function (req, res) {
   res.send('Hello World!');
 });
 
 app.get('/siteData', function (req, res) {
   res.json('Site data reached!');
-})
+});
 
 //app.listen(3000, function () {
   //console.log('Example app listening on port 3000!');
