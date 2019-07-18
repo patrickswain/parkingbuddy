@@ -18,9 +18,9 @@ app.get('/siteData', function (req, res) {
   res.json('Site data reached!');
 })
 
-app.listen(3000, function () {
+//app.listen(3000, function () {
   //console.log('Example app listening on port 3000!');
-});
+//});
 
 //app.get('/StudentUnion', determineGarage("SU"));
 //app.get('/ClassroomBuilding1', determineGarage("CB1"));
