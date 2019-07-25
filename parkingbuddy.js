@@ -24,7 +24,14 @@ app.use('/testing', router); // For testing
 // });
 router.route('/').get(function(req,res){
   var data = determineGarage(identifier).then(function (value) {
-    res.json({data: value.Garages[0]});
+    if (value == undefined)
+    {
+      res.json({data: "Undefined"});
+    }
+    else
+    {
+      res.json({data: value.Garages[0]});
+    }
   }, function (err) {
     res.json({error: err});
   });
