@@ -7,16 +7,29 @@ const router = express.Router();
 var fs = require('fs');
 
 // Files /////////
-var dbfile = require('./accessdatabase.js');
+//var dbfile = require('./accessdatabase.js');
 var scraper = require('./scrape.js');
+var db2 = require('./anotherdb.js');
 
 // Routes ////////
-app.use('/testing', router); // For testing
-router.route('/').get(function(req,res){
-    res.json({status: "Success"});
+app.use(function (req, res, next) {
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Credentials', true);
+  next();
 });
 
-
+app.use('/testing', router); // For testing
+// router.route('/').get(function(req,res){
+//     res.json({status: "Success"});
+// });
+router.route('/').get(function(req,res){
+  var data = determineGarage(identifier).then(function (value) {
+    res.json({data: value.Garages[0]});
+  }, function (err) {
+    res.json({error: err});
+  });
+    //res.json({status: "Success"});
+});
 
 app.get('/', function (req, res) {
   res.send('Hello World!');
@@ -32,9 +45,6 @@ app.listen(PORT, () => {
     console.log(`Our app is running on port ${ PORT }`);
 });
 
-//app.get('/StudentUnion', determineGarage("SU"));
-//app.get('/ClassroomBuilding1', determineGarage("CB1"));
-
 // MongoDB document names
 var SU_DocName = "SU";
 var CB1_DocName = "CB1";
@@ -46,11 +56,10 @@ var PSY_DocName = "PSY";
 // Constants
 const num_garages = 7;
 const identifier = "SU";
+//var databaseInfo;
 
 // Actual code ////////
 console.log(scraper.testModule());
-console.log(dbfile.testModule());
-
 
 function isFull(string)
 {
@@ -75,46 +84,40 @@ async function determineGarage(identifier)
   scraper.scrapeSite();
   let rawdata = fs.readFileSync('content.json');
   let data = JSON.parse(rawdata);
-  console.log("Garage A : " + data.GarageA + " Is Full : " + (isFull(data.GarageA)));
-  console.log("Garage B : " + data.GarageB + " Is Full : " + (isFull(data.GarageB)));
-  console.log("Garage C : " + data.GarageC + " Is Full : " + (isFull(data.GarageC)));
-  console.log("Garage D : " + data.GarageD + " Is Full : " + (isFull(data.GarageD)));
-  console.log("Garage H : " + data.GarageH + " Is Full : " + (isFull(data.GarageH)));
-  console.log("Garage I : " + data.GarageI + " Is Full : " + (isFull(data.GarageI)));
-  console.log("Garage Libra : " + data.GarageLibra + " Is Full : " + (isFull(data.GarageLibra)));
 
-  // Array of garages sorted by distances
-  var garageList;
   try
   {
-    garageList = dbfile.fetchFromDB(identifier);
-    return garageList;//console.log("GARAGE LIST" + garageList);
+    return await db2.fetchFromDB().then(function(items) {
+      console.info('The promise was fulfilled with items!', items);
+      console.info('garage A distance is ' , items.Garages[3].distance);
+    }, function(err) {
+      console.error('The promise was rejected', err, err.stack);
+    });
+
   }
-  catch (error)
+  catch (err)
   {
-    console.log(error);
+    console.error(err);
   }
- // event that catches
-  //
-  return garageList;
-  //return "FORMATTED FIRST GARAGE" + garageList[0].split(' ').join('');
-  // Once connecting is fixed
-  // for (var i = 0; i < num_garages; i++)
-  // {
-  //   garage_name = garageList[i].split(' ').join('');
-  //
-  //   console.log(data.garage_name); // Get occupancy of garage
-    // if (isNotFull(data.garage_name))
-    // {
-    //   return garage_name + garageList[i].distance;
-    // }
-  // }
-  // return "No garages are currently available";
 }
 
-//determineGarage(identifier);
-determineGarage(identifier).then(result => {
-  console.log(garageList);
-}).catch(err => {
-
+determineGarage(identifier).then(function(value) {
+  console.info('WE WON!', value);
+}, function(err) {
+  console.error('The promise was rejected at the ENDDD', err, err.stack);
 });
+
+
+//return "FORMATTED FIRST GARAGE" + garageList[0].split(' ').join('');
+// Once connecting is fixed
+// for (var i = 0; i < num_garages; i++)
+// {
+//   garage_name = garageList[i].split(' ').join('');
+//
+//   console.log(data.garage_name); // Get occupancy of garage
+  // if (isNotFull(data.garage_name))
+  // {
+  //   return garage_name + garageList[i].distance;
+  // }
+// }
+// return "No garages are currently available";
