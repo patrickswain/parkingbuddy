@@ -27,6 +27,10 @@ app.use(bodyParser.json());
 
 app.use('/testing', router);
 
+router.route('/request').post(function(req,res){
+  console.log("REQUEST TESTING" + req.body);
+});
+
 router.route('/').post(function(req,res){
   console.log("req head is :" + req.head);
   console.log("req body is :" + req.body);
