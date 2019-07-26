@@ -23,7 +23,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/testing', router);
-app.use(express.bodyParser());
+app.use(bodyParser.json());
  // For testing
 // router.route('/').get(function(req,res){
 //     res.json({status: "Success"});
