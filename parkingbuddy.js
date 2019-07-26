@@ -22,15 +22,11 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use('/testing', router);
 
- // For testing
-// router.route('/').get(function(req,res){
-//     res.json({status: "Success"});
-// });
 router.route('/').post(function(req,res){
   console.log("req head is :" + req.head);
   console.log("req body is :" + req.body);
