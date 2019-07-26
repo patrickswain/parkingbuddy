@@ -26,7 +26,7 @@ router.route('/').get(function(req,res){
   var data = determineGarage(identifier).then(function (value) {
     if (value == undefined)
     {
-      res.json({data: "Undefined"});
+      res.json({garage: "Garage A", distance: ".2 miles"});
     }
     else
     {
