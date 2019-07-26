@@ -22,6 +22,7 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use('/testing', router);
@@ -31,7 +32,8 @@ app.use('/testing', router);
 //     res.json({status: "Success"});
 // });
 router.route('/').post(function(req,res){
-  console.log("req is :" + req.body);
+  console.log("req head is :" + req.head);
+  console.log("req body is :" + req.body);
   res.json({garage: "Garage A", distance: ".2 miles"});
   // var data = determineGarage(identifier).then(function (value) {
   //   if (value == undefined)
