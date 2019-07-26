@@ -5,6 +5,7 @@ var express = require('express');
 var app = express();
 const router = express.Router();
 var fs = require('fs');
+var bodyParser = require('body-parser');
 
 // Files /////////
 //var dbfile = require('./accessdatabase.js');
