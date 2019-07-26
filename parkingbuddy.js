@@ -13,6 +13,9 @@ var db2 = require('./anotherdb.js');
 
 // Routes ////////
 app.use(function (req, res, next) {
+  req.set('Access-Control-Allow-Origin', '*');
+  req.set('Access-Control-Allow-Credentials', true);
+
   res.set('Access-Control-Allow-Origin', '*');
   res.set('Access-Control-Allow-Credentials', true);
   next();
