@@ -23,11 +23,11 @@ app.use('/testing', router); // For testing
 //     res.json({status: "Success"});
 // });
 router.route('/').get(function(req,res){
-  console.log(req.body);
+  //console.log(req.body);
   var data = determineGarage(identifier).then(function (value) {
     if (value == undefined)
     {
-      res.json({garage: "Garage A", distance: ".2 miles"});
+      res.json({garage: "Garage A", distance: ".2 miles", input : req.head});
     }
     else
     {
