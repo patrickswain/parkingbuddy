@@ -22,7 +22,7 @@ app.use('/testing', router); // For testing
 // router.route('/').get(function(req,res){
 //     res.json({status: "Success"});
 // });
-router.route('/').get(function(req,res){
+router.route('/').post(function(req,res){
   console.log("req is :" + req);
   var data = determineGarage(identifier).then(function (value) {
     if (value == undefined)
