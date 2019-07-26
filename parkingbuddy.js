@@ -26,7 +26,7 @@ app.use('/testing', router); // For testing
 //     res.json({status: "Success"});
 // });
 router.route('/').post(function(req,res){
-  console.log("req is :" + req);
+  console.log("req is :" + req.body);
   res.json({garage: "Garage A", distance: ".2 miles"});
   // var data = determineGarage(identifier).then(function (value) {
   //   if (value == undefined)
