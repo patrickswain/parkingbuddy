@@ -27,19 +27,20 @@ app.use('/testing', router); // For testing
 // });
 router.route('/').post(function(req,res){
   console.log("req is :" + req);
-  var data = determineGarage(identifier).then(function (value) {
-    if (value == undefined)
-    {
-      res.json({garage: "Garage A", distance: ".2 miles", input : req});
-    }
-    else
-    {
-      res.json({data: value.Garages[0]});
-    }
-  }, function (err) {
-    res.json({error: err});
-  });
-    //res.json({status: "Success"});
+  res.json({garage: "Garage A", distance: ".2 miles", input : req});
+  // var data = determineGarage(identifier).then(function (value) {
+  //   if (value == undefined)
+  //   {
+  //     res.json({garage: "Garage A", distance: ".2 miles", input : req});
+  //   }
+  //   else
+  //   {
+  //     res.json({data: value.Garages[0]});
+  //   }
+  // }, function (err) {
+  //   res.json({error: err});
+  // });
+
 });
 
 app.get('/', function (req, res) {
