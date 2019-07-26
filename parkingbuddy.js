@@ -27,7 +27,7 @@ router.route('/').post(function(req,res){
   var data = determineGarage(identifier).then(function (value) {
     if (value == undefined)
     {
-      res.json({garage: "Garage A", distance: ".2 miles", input : req.head});
+      res.json({garage: "Garage A", distance: ".2 miles", input : req});
     }
     else
     {
