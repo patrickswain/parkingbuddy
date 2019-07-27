@@ -67,9 +67,49 @@ router.route('/MSB').get(function(req, res)
   });
 });
 
-router.route('/ENG').get(function(req, res)
+router.route('/ENG1').get(function(req, res)
 {
-  determineGarage("ENG").then(function(value) {
+  determineGarage("ENG1").then(function(value) {
+    //console.info('WE WON!', value);
+    res.send(value);
+  }, function(err) {
+    console.error('The promise was rejected at the ENDDD', err, err.stack);
+  });
+});
+
+router.route('/ENG2').get(function(req, res)
+{
+  determineGarage("ENG2").then(function(value) {
+    //console.info('WE WON!', value);
+    res.send(value);
+  }, function(err) {
+    console.error('The promise was rejected at the ENDDD', err, err.stack);
+  });
+});
+
+router.route('/BA1').get(function(req, res)
+{
+  determineGarage("BA1").then(function(value) {
+    //console.info('WE WON!', value);
+    res.send(value);
+  }, function(err) {
+    console.error('The promise was rejected at the ENDDD', err, err.stack);
+  });
+});
+
+router.route('/BA2').get(function(req, res)
+{
+  determineGarage("BA2").then(function(value) {
+    //console.info('WE WON!', value);
+    res.send(value);
+  }, function(err) {
+    console.error('The promise was rejected at the ENDDD', err, err.stack);
+  });
+});
+
+router.route('/HEC').get(function(req, res)
+{
+  determineGarage("HEC").then(function(value) {
     //console.info('WE WON!', value);
     res.send(value);
   }, function(err) {
@@ -80,6 +120,96 @@ router.route('/ENG').get(function(req, res)
 router.route('/PSY').get(function(req, res)
 {
   determineGarage("PSY").then(function(value) {
+    //console.info('WE WON!', value);
+    res.send(value);
+  }, function(err) {
+    console.error('The promise was rejected at the ENDDD', err, err.stack);
+  });
+});
+
+router.route('/VAB').get(function(req, res)
+{
+  determineGarage("VAB").then(function(value) {
+    //console.info('WE WON!', value);
+    res.send(value);
+  }, function(err) {
+    console.error('The promise was rejected at the ENDDD', err, err.stack);
+  });
+});
+
+router.route('/BIO').get(function(req, res)
+{
+  determineGarage("BIO").then(function(value) {
+    //console.info('WE WON!', value);
+    res.send(value);
+  }, function(err) {
+    console.error('The promise was rejected at the ENDDD', err, err.stack);
+  });
+});
+
+router.route('/TA').get(function(req, res)
+{
+  determineGarage("TA").then(function(value) {
+    //console.info('WE WON!', value);
+    res.send(value);
+  }, function(err) {
+    console.error('The promise was rejected at the ENDDD', err, err.stack);
+  });
+});
+
+router.route('/NSC').get(function(req, res)
+{
+  determineGarage("NSC").then(function(value) {
+    //console.info('WE WON!', value);
+    res.send(value);
+  }, function(err) {
+    console.error('The promise was rejected at the ENDDD', err, err.stack);
+  });
+});
+
+router.route('/HPA1').get(function(req, res)
+{
+  determineGarage("HPA1").then(function(value) {
+    //console.info('WE WON!', value);
+    res.send(value);
+  }, function(err) {
+    console.error('The promise was rejected at the ENDDD', err, err.stack);
+  });
+});
+
+router.route('/HPA2').get(function(req, res)
+{
+  determineGarage("HPA2").then(function(value) {
+    //console.info('WE WON!', value);
+    res.send(value);
+  }, function(err) {
+    console.error('The promise was rejected at the ENDDD', err, err.stack);
+  });
+});
+
+router.route('/CHEM').get(function(req, res)
+{
+  determineGarage("CHEM").then(function(value) {
+    //console.info('WE WON!', value);
+    res.send(value);
+  }, function(err) {
+    console.error('The promise was rejected at the ENDDD', err, err.stack);
+  });
+});
+
+router.route('/TCH').get(function(req, res)
+{
+  determineGarage("TCH").then(function(value) {
+    //console.info('WE WON!', value);
+    res.send(value);
+  }, function(err) {
+    console.error('The promise was rejected at the ENDDD', err, err.stack);
+  });
+});
+
+router.route('/EC').get(function(req, res)
+{
+  determineGarage("EC").then(function(value) {
     //console.info('WE WON!', value);
     res.send(value);
   }, function(err) {
