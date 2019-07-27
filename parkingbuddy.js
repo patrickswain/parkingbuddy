@@ -22,11 +22,15 @@ app.use(function (req, res, next) {
   next();
 });
 
-//app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
 
 app.use('/testing', router);
+
+router.route('/StudentUnion').get(function(req, res)
+{
+  res.send(determineGarage("SU"));
+});
 
 router.route('/request').post(function(req,res){
   console.log("REQUEST TESTING" + bodyParser.json(req.body));
@@ -38,19 +42,6 @@ router.route('/').post(function(req,res){
   console.log("req head is :" + req.head);
   console.log("req body is :" + req.body);
   res.json({garage: "Garage A", distance: ".2 miles"});
-  // var data = determineGarage(identifier).then(function (value) {
-  //   if (value == undefined)
-  //   {
-  //     res.json({garage: "Garage A", distance: ".2 miles", input : req});
-  //   }
-  //   else
-  //   {
-  //     res.json({data: value.Garages[0]});
-  //   }
-  // }, function (err) {
-  //   res.json({error: err});
-  // });
-
 });
 
 app.get('/', function (req, res) {
@@ -78,13 +69,14 @@ var PSY_DocName = "PSY";
 // Constants
 const num_garages = 7;
 const identifier = "SU";
-//var databaseInfo;
 
 // Actual code ////////
 console.log(scraper.testModule());
 
 function isFull(string)
 {
+  console.log(typeof string);
+
   // String in format of "1234/4321"
   var length = string.length;
 
@@ -96,22 +88,158 @@ function isFull(string)
   numerator = parseInt(numerator);
   denominator = parseInt(denominator);
 
+  //console.log("string in isFull is " + string);
+  //console.log("numerator is " + numerator + "denominator is " + denominator);
+
   // Returns true if garage is full
   return (numerator / denominator > 0 ? false : true);
+}
+
+function testIsFull(garage_name, data)
+{
+  if (garage_name == "GarageA")
+  {
+    console.log("GarageA is full? " + isFull(data.GarageA));
+  }
+  else if (garage_name == "GarageB")
+  {
+    console.log("GarageB is full? " + isFull(data.GarageB));
+  }
+  else if (garage_name == "GarageC")
+  {
+    console.log("GarageC is full? " + isFull(data.GarageC));
+  }
+   else if (garage_name == "GarageD")
+  {
+    console.log("GarageD is full? " + isFull(data.GarageD));
+  }
+  else if (garage_name == "GarageH")
+  {
+    console.log("GarageH is full? " + isFull(data.GarageH));
+  }
+  else if (garage_name == "GarageI")
+  {
+    console.log("GarageI is full? " + isFull(data.GarageI));
+  }
+  else if (garage_name == "Libra")
+  {
+    console.log("Libra is full? " + isFull(data.GarageLibra));
+  }
 }
 
 async function determineGarage(identifier)
 {
   // Scrape site and load json file
-  scraper.scrapeSite();
+  //scraper.scrapeSite();
   let rawdata = fs.readFileSync('content.json');
   let data = JSON.parse(rawdata);
 
+  var garage_name;
+
   try
   {
-    return await db2.fetchFromDB().then(function(items) {
+    return await db2.fetchFromDB().then(function(items)
+    {
       console.info('The promise was fulfilled with items!', items);
-      console.info('garage A distance is ' , items.Garages[3].distance);
+
+      // Actual logic
+      for (var i = 0; i < num_garages; i++)
+      {
+        console.log("TRY NUMBER " + i + " is " + items.Garages[i].id);
+        garage_name = items.Garages[i].id.split(' ').join('');
+
+        //testIsFull(garage_name, data);
+
+        if (garage_name == "GarageA")
+        {
+          if (isFull(data.GarageA))
+          {
+            console.log("Garage A is full, continue to next garage");
+            continue;
+          }
+          else
+          {
+            return JSON.stringify({ garage: "Garage A", distance: items.Garages[i].distance, availability: data.GarageA});
+          }
+
+        }
+        else if (garage_name == "GarageB")
+        {
+          if (isFull(data.GarageB))
+          {
+            console.log("Garage B is full, continue to next garage");
+            continue;
+          }
+          else
+          {
+            return JSON.stringify({ garage: "Garage B", distance: items.Garages[i].distance, availability: data.GarageB});
+          }
+        }
+        else if (garage_name == "GarageC")
+        {
+          if (isFull(data.GarageC))
+          {
+            console.log("Garage C is full, continue to next garage");
+            continue;
+          }
+          else
+          {
+            return JSON.stringify({ garage: "Garage C", distance: items.Garages[i].distance, availability: data.GarageC});
+          }
+        }
+        else if (garage_name == "GarageD")
+        {
+          if (isFull(data.GarageD))
+          {
+            console.log("Garage D is full, continue to next garage");
+            continue;
+          }
+          else
+          {
+            return JSON.stringify({ garage: "Garage D", distance: items.Garages[i].distance, availability: data.GarageD});
+          }
+        }
+        else if (garage_name == "GarageH")
+        {
+          if (isFull(data.GarageH))
+          {
+            console.log("Garage H is full, continue to next garage");
+            continue;
+          }
+          else
+          {
+            return JSON.stringify({ garage: "Garage H", distance: items.Garages[i].distance, availability: data.GarageH});
+          }
+        }
+        else if (garage_name == "GarageI")
+        {
+          if (isFull(data.GarageI))
+          {
+            console.log("Garage I is full, continue to next garage");
+            continue;
+          }
+          else
+          {
+            return JSON.stringify({ garage: "Garage I", distance: items.Garages[i].distance, availability: data.GarageI});
+          }
+        }
+        else if (garage_name == "Libra")
+        {
+          if (isFull(data.GarageA))
+          {
+            console.log("Garage Libra is full, continue to next garage");
+            continue;
+          }
+          else
+          {
+            return JSON.stringify({ garage: "Garage Libra", distance: items.Garages[i].distance, availability: data.GarageLibra});
+          }
+        }
+
+        return JSON.stringify({error : "All garages are full, go to park and ride"});
+
+      }
+
     }, function(err) {
       console.error('The promise was rejected', err, err.stack);
     });
@@ -128,18 +256,3 @@ determineGarage(identifier).then(function(value) {
 }, function(err) {
   console.error('The promise was rejected at the ENDDD', err, err.stack);
 });
-
-
-//return "FORMATTED FIRST GARAGE" + garageList[0].split(' ').join('');
-// Once connecting is fixed
-// for (var i = 0; i < num_garages; i++)
-// {
-//   garage_name = garageList[i].split(' ').join('');
-//
-//   console.log(data.garage_name); // Get occupancy of garage
-  // if (isNotFull(data.garage_name))
-  // {
-  //   return garage_name + garageList[i].distance;
-  // }
-// }
-// return "No garages are currently available";
