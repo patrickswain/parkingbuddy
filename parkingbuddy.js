@@ -29,7 +29,7 @@ app.use('/testing', router);
 
 router.route('/StudentUnion').get(function(req, res)
 {
-  determineGarage(identifier).then(function(value) {
+  determineGarage("SU").then(function(value) {
     //console.info('WE WON!', value);
     res.send(value);
   }, function(err) {
@@ -37,10 +37,14 @@ router.route('/StudentUnion').get(function(req, res)
   });
 });
 
-router.route('/request').post(function(req,res){
-  console.log("REQUEST TESTING" + bodyParser.json(req.body));
-  console.log("REQUEST TESTING" + req.body);
-  res.json({kill: "me", please:"killme"});
+router.route('/CB1').get(function(req, res)
+{
+  determineGarage("CB1").then(function(value) {
+    //console.info('WE WON!', value);
+    res.send(value);
+  }, function(err) {
+    console.error('The promise was rejected at the ENDDD', err, err.stack);
+  });
 });
 
 router.route('/').post(function(req,res){
@@ -143,7 +147,7 @@ async function determineGarage(identifier)
 
   try
   {
-    return await db2.fetchFromDB().then(function(items)
+    return await db2.fetchFromDB(identifier).then(function(items)
     {
       console.info('The promise was fulfilled with items!', items);
 
