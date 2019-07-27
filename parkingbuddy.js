@@ -29,7 +29,12 @@ app.use('/testing', router);
 
 router.route('/StudentUnion').get(function(req, res)
 {
-  res.send(determineGarage("SU"));
+  determineGarage(identifier).then(function(value) {
+    //console.info('WE WON!', value);
+    res.send(value);
+  }, function(err) {
+    console.error('The promise was rejected at the ENDDD', err, err.stack);
+  });
 });
 
 router.route('/request').post(function(req,res){
@@ -251,8 +256,8 @@ async function determineGarage(identifier)
   }
 }
 
-determineGarage(identifier).then(function(value) {
-  console.info('WE WON!', value);
-}, function(err) {
-  console.error('The promise was rejected at the ENDDD', err, err.stack);
-});
+// determineGarage(identifier).then(function(value) {
+//   console.info('WE WON!', value);
+// }, function(err) {
+//   console.error('The promise was rejected at the ENDDD', err, err.stack);
+// });
