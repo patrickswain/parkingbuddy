@@ -47,6 +47,46 @@ router.route('/CB1').get(function(req, res)
   });
 });
 
+router.route('/CB2').get(function(req, res)
+{
+  determineGarage("CB2").then(function(value) {
+    //console.info('WE WON!', value);
+    res.send(value);
+  }, function(err) {
+    console.error('The promise was rejected at the ENDDD', err, err.stack);
+  });
+});
+
+router.route('/MSB').get(function(req, res)
+{
+  determineGarage("MSB").then(function(value) {
+    //console.info('WE WON!', value);
+    res.send(value);
+  }, function(err) {
+    console.error('The promise was rejected at the ENDDD', err, err.stack);
+  });
+});
+
+router.route('/ENG').get(function(req, res)
+{
+  determineGarage("ENG").then(function(value) {
+    //console.info('WE WON!', value);
+    res.send(value);
+  }, function(err) {
+    console.error('The promise was rejected at the ENDDD', err, err.stack);
+  });
+});
+
+router.route('/PSY').get(function(req, res)
+{
+  determineGarage("PSY").then(function(value) {
+    //console.info('WE WON!', value);
+    res.send(value);
+  }, function(err) {
+    console.error('The promise was rejected at the ENDDD', err, err.stack);
+  });
+});
+
 router.route('/').post(function(req,res){
   console.log("req head is :" + req.head);
   console.log("req body is :" + req.body);
