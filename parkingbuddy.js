@@ -29,6 +29,7 @@ app.use(bodyParser.urlencoded({extended : true}));
 app.use('/testing', router);
 
 router.route('/request').post(function(req,res){
+  console.log("REQUEST TESTING" + bodyParser.json(req.body));
   console.log("REQUEST TESTING" + req.body);
   res.json({kill: "me", please:"killme"});
 });
