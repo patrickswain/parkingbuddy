@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({extended : true}));
 
 app.use('/testing', router);
 
-router.route('/StudentUnion').get(function(req, res)
+router.route('/SU').get(function(req, res)
 {
   determineGarage("SU").then(function(value) {
     //console.info('WE WON!', value);
