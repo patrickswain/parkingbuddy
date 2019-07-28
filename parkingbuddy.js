@@ -6,6 +6,7 @@ var app = express();
 const router = express.Router();
 var fs = require('fs');
 var bodyParser = require('body-parser');
+var path = require('path');
 
 // Files /////////
 //var dbfile = require('./accessdatabase.js');
@@ -217,10 +218,9 @@ router.route('/EC').get(function(req, res)
   });
 });
 
-router.route('/').post(function(req,res){
-  console.log("req head is :" + req.head);
-  console.log("req body is :" + req.body);
-  res.json({garage: "Garage A", distance: ".2 miles"});
+app.use(express.static('client/build'));
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'client', 'source', 'index.html'));
 });
 
 app.get('/', function (req, res) {
