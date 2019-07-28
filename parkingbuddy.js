@@ -220,7 +220,7 @@ router.route('/EC').get(function(req, res)
 
 app.use(express.static('client/build'));
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'client', 'source', 'index.html'));
+  res.sendFile(path.resolve(__dirname, 'client', 'public', 'index.html'));
 });
 
 app.get('/', function (req, res) {
