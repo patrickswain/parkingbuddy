@@ -1,5 +1,39 @@
 .App {
+  /*margin-right: 100px;
+  margin-left: 100px;
+  */
+}
+
+.center {
+  margin: auto;
+  /*
+  width: 60%;
+  border: 3px solid #73AD21;
+  padding: 10px;
+  */
   text-align: center;
+}
+
+.Header {
+  text-align: center;
+}
+
+.pictureHeight {
+  height: 175px;
+}
+
+.top-buffer { margin-top:20px; }
+
+.astext {
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+    cursor: pointer;
+}
+
+.astext:hover {
+  color: blue;
 }
 
 .App-logo {

@@ -218,21 +218,18 @@ router.route('/EC').get(function(req, res)
   });
 });
 
-app.use(express.static('client/src'));
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'client', 'public', 'index.html'));
-});
+// Connect React to API
+if (process.env.NODE_ENV === 'production')
+{
+  app.use(express.static('new_client/build'));
 
-// app.get('/', function (req, res) {
-//   res.send('Hello World!');
-// });
-//
-// app.get('/siteData', function (req, res) {
-//   res.json('Site data reached!');
-// });
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'new_client', 'build', 'index.html'));
+  })
+}
 
 // Connecting to local port or heroku port
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Our app is running on port ${ PORT }`);
 });
