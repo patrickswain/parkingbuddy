@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node parkingbuddy.js",
     "client": "npm start --prefix new_client",
-    "dev": "concurrently \"npm run start\" \"npm run client\""
+    "dev": "concurrently \"npm run start\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix new_client && npm run build --prefix new_client"
   },
   "author": "",
   "license": "ISC",
