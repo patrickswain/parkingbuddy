@@ -7,10 +7,10 @@ class Buildings extends Component {
     super();
     this.state =
     {
-      destination : "blank",
-      garage : "blank",
-      distance : "blank",
-      spaces : "blank",
+      destination : "",
+      garage : "",
+      distance : "   ",
+      spaces : "        ",
       src : "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.391417721491!2d-81.20224858518527!3d28.6024273824297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88e7685d6a0a495f%3A0x5fd59b92b3c79bab!2sUniversity+of+Central+Florida!5e1!3m2!1sen!2sus!4v1564505557528!5m2!1sen!2sus"
     };
     this.changeDestination = this.changeDestination.bind(this);
@@ -116,11 +116,21 @@ class Buildings extends Component {
     .then(response => response.json())
     .then((result) => {
       this.setPicture(code, result.garage);
+      if(result.garage === "Park and Ride")
+      {
+        this.setState({
+          garage : "Park and Ride",
+          distance : "  ",
+          spaces : "None, All Full"
+        });
+      }
+      else{
         this.setState({
           garage : result.garage,
           distance : "0".concat(result.distance),
           spaces : result.availability
         });
+      }
       })
       .catch(error => {
         console.log('Error',error);
