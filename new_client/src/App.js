@@ -9,7 +9,7 @@ function App() {
   return (
     <div className = "App container">
       <div className = "row">
-        <img src={Plogo} alt="logo" width="75" height="75"/>
+        <img className = "parkingPictureStyle" src={Plogo} alt="logo" width="75" height="75"/>
         <h1 className = "center">Parking Buddy</h1>
       </div>
       <div className = "row top-buffer">
