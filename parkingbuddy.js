@@ -306,7 +306,7 @@ function testIsFull(garage_name, data)
 async function determineGarage(identifier)
 {
   // Scrape site and load json file
-  scraper.scrapeSite();
+  //scraper.scrapeSite();
   let rawdata = fs.readFileSync('content.json');
   let data = JSON.parse(rawdata);
 
