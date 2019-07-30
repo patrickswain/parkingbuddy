@@ -412,7 +412,7 @@ async function determineGarage(identifier)
           }
         }
 
-        return JSON.stringify({garage : "All Garages are full"});
+        return JSON.stringify({garage : "Park and Ride"});
 
       }
 
