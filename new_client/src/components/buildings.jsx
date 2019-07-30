@@ -119,7 +119,7 @@ class Buildings extends Component {
       if(result.garage === "Park and Ride")
       {
         this.setState({
-          garage : "Park and Ride",
+          garage : "All Garages Full",
           distance : "  ",
           spaces : "None, All Full"
         });
